@@ -1,0 +1,13 @@
+const router = require("express").Router();
+const { authenticate, authorize } = require("../middleware/auth");
+const controller = require("../controllers/adminController");
+router.use(authenticate, authorize("admin"));
+router.get("/stats", controller.stats);
+router.get("/users", controller.users);
+router.patch("/users/:id/status", controller.updateUser);
+router.get("/jobs", controller.jobs);
+router.get("/jobs/:id", controller.jobDetail);
+router.patch("/jobs/:id/moderation", controller.moderateJob);
+router.get("/reports", controller.reports);
+router.patch("/reports/:id", controller.reviewReport);
+module.exports = router;
